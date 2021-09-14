@@ -349,7 +349,10 @@ googlechat:
 kafka:
   hostport: "" # Apache Kafka Host:Port (ex: localhost:9092). Defaults to port 9092 if no port is specified after the domain, if not empty, Kafka output is enabled
   topic: "" # Name of the topic, if not empty, Kafka output is enabled
-  # minimumpriority: "debug" # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
+#  SASLEnabled : true # Enable SASL plain authentication
+#  login: "" # SASL login
+#  password: "" # SASL password
+# minimumpriority: "debug" # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
 
 kafkarest:
   address: "" # The full URL to the topic (example "http://kafkarest:8082/topics/test")

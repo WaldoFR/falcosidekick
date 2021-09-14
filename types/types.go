@@ -331,6 +331,9 @@ type kafkaConfig struct {
 	HostPort        string
 	Topic           string
 	MinimumPriority string
+	CACertFile		string
+	Login			string
+	Password		string
 }
 
 type KafkaRestConfig struct {
