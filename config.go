@@ -207,6 +207,8 @@ func getConfig() *types.Configuration {
 	v.SetDefault("Kafka.HostPort", "")
 	v.SetDefault("Kafka.Topic", "")
 	v.SetDefault("Kafka.CACertFile", "")
+	v.SetDefault("Kafka.AutoCreateTopic", true)
+	v.SetDefault("Kafka.Compression", "")
 	v.SetDefault("Kafka.Login", "")
 	v.SetDefault("Kafka.Password", "")
 	v.SetDefault("Kafka.MinimumPriority", "")
