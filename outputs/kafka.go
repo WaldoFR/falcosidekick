@@ -66,8 +66,8 @@ func NewKafkaClient(config *types.Configuration, stats *types.Statistics, promSt
 	}
 
 	kafkaWriter.Transport = &kafka.Transport{
-		TLS:         tlsConfig,
-		SASL: sasl,
+		TLS:	tlsConfig,
+		SASL: 	sasl,
 	}
 	return &Client{
 		OutputType:      "Kafka",
@@ -97,19 +97,9 @@ func (c *Client) KafkaProduce(falcopayload types.FalcoPayload) {
 
 	err = c.KafkaProducer.WriteMessages(context.Background(), kafkaMsg)
 	if err != nil {
-		if err.Error() == kafka.UnknownTopicOrPartition.Error() && c.Config.Kafka.AutoCreateTopic {
-			if errCreatingTopic := c.createKafkaTopic(); errCreatingTopic != nil {
-				c.setKafkaErrorMetrics()
-				log.Printf("[ERROR] : Kafka - %v\n", errCreatingTopic)
-				return
-			} else {
-				log.Printf("[INFO] : Kafka - Created topic %v\n", c.Config.Kafka.Topic)
-			}
-		} else {
-			c.setKafkaErrorMetrics()
-			log.Printf("[ERROR] : Kafka - %v\n", err)
-			return
-		}
+		c.setKafkaErrorMetrics()
+		log.Printf("[ERROR] : Kafka - %v\n", err)
+		return
 	}
 
 	go c.CountMetric("outputs", 1, []string{"output:kafka", "status:ok"})
